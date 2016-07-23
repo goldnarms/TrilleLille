@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TrilleLille.Web.Data;
 using TrilleLille.Web.Models;
 using TrilleLille.Web.Services;
 
@@ -40,11 +39,13 @@ namespace TrilleLille.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
+            var connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<TrilleLilleContext>(options => options.UseSqlServer(connection));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<TrilleLilleContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
