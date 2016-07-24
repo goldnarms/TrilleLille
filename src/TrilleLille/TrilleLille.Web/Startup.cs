@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TrilleLille.Web.Config;
 using TrilleLille.Web.Models;
 using TrilleLille.Web.Services;
 
@@ -44,7 +46,13 @@ namespace TrilleLille.Web
             services.AddDbContext<TrilleLilleContext>(options => options.UseSqlServer(connection));
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireUppercase = false;
+
+            })
                 .AddEntityFrameworkStores<TrilleLilleContext>()
                 .AddDefaultTokenProviders();
 
@@ -53,6 +61,17 @@ namespace TrilleLille.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddSingleton<IMapper>(AddAutomapper());
+        }
+
+        private IMapper AddAutomapper()
+        {
+            var mapperConfiguration = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MapperProfile());
+            });
+            return mapperConfiguration.CreateMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

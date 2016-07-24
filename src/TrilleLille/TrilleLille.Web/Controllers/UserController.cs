@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace TrilleLille.Web.Controllers{
     public class UserController: Controller{
         public UserController(){

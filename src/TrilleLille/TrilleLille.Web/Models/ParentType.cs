@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace TrilleLille.Web.Models
 {
     public enum ParentType
     {

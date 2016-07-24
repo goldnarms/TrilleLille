@@ -11,8 +11,12 @@ namespace TrilleLille.Web.Models
 
         public string Name { get; set; }
 
-        public Location Location { get; set; }
+        public int LocationId { get; set; }
 
         public string CreatorId { get; set; }
+
+        public virtual Location Location { get; set; }
+
+        public virtual ApplicationUser Creator { get; set; }
     }
 }

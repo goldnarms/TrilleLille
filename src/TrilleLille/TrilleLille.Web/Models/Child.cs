@@ -1,4 +1,6 @@
-﻿namespace TrilleLille.Web.Models
+﻿using System;
+
+namespace TrilleLille.Web.Models
 {
     public class Child
     {
@@ -11,5 +13,6 @@
         public DateTime BirthDate { get; set; }
 
         public Gender Gender { get; set;}
+        public virtual ApplicationUser Parent { get; set; }
     }
 }

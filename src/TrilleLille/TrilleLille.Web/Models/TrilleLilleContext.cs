@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TrilleLille.Web.Models.GroupViewModels;
 
 namespace TrilleLille.Web.Models
 {
@@ -17,5 +18,9 @@ namespace TrilleLille.Web.Models
 
         public DbSet<Group> Groups { get; set; }
         public DbSet<Child> Children { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<GroupListViewModel> GroupListViewModel { get; set; }
     }
 }

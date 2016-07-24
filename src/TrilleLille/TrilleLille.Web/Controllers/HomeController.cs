@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TrilleLille.Web.Models.HomeViewModels;
 
 namespace TrilleLille.Web.Controllers
 {
@@ -30,6 +31,11 @@ namespace TrilleLille.Web.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        public IActionResult Search(HomeViewModel viewModel)
+        {
+            return RedirectToAction("Index", "Search", new { seachTerm = viewModel.SearchTerm});
         }
     }
 }
