@@ -12,7 +12,6 @@ namespace TrilleLille.Web.Controllers{
 
         public IActionResult Edit(string userId){
             return View();
-        }
-        
+        }        
     }
 }
