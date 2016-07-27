@@ -13,6 +13,8 @@ namespace TrilleLille.Web.Models
         public ParentType ParentType { get; set; }
         public string Bio { get; set; }
         public DateTime BirthDate { get; set; }
+        public string ProfileImageUrl { get; set; }
+        public virtual IEnumerable<Child> Children { get; set; }
 
     }
 }
