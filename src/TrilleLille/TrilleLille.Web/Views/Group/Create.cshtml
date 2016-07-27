@@ -18,14 +18,14 @@
                 <div class="input-field col s12">
                     <input asp-for="CreatorName" type="text" class="validate">
                     <span asp-validation-for="CreatorName" class="text-danger" />
-                    <label asp-for="CreatorName"></label>
+                    <label class="active" asp-for="CreatorName"></label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input asp-for="CreatorBio" type="text" class="validate">
                     <span asp-validation-for="CreatorBio" class="text-danger" />
-                    <label asp-for="CreatorBio"></label>
+                    <label class="active" asp-for="CreatorBio"></label>
                 </div>
             </div>
             <div class="input-field col s12">
@@ -34,7 +34,7 @@
                     <option value="1">Mamma</option>
                     <option value="2">Pappa</option>
                 </select>
-                <label>Foreldretype</label>
+                <label class="active" >Foreldretype</label>
             </div>
         }
         <div class="row">
@@ -48,7 +48,7 @@
             <div class="input-field col s12">
                 <textarea id="taIntro" asp-for="GroupIntro" class="materialize-textarea"></textarea>
                 <span asp-validation-for="GroupIntro" class="text-danger" />
-                <label asp-for="GroupIntro"></label>
+                <label class="active" asp-for="GroupIntro"></label>
             </div>
         </div>
     </form>
@@ -107,5 +107,4 @@
   $(document).ready(function() {
     $('select').material_select();
   });
-
-                                                             }
+}
