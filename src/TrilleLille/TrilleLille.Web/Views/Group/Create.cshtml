@@ -1,0 +1,111 @@
+@model CreateGroupViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using TrilleLille.Web.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <form class="col s12" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <div class="row">
+                <div class="input-field col s12">
+                    <input asp-for="CreatorName" type="text" class="validate">
+                    <span asp-validation-for="CreatorName" class="text-danger" />
+                    <label asp-for="CreatorName"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input asp-for="CreatorBio" type="text" class="validate">
+                    <span asp-validation-for="CreatorBio" class="text-danger" />
+                    <label asp-for="CreatorBio"></label>
+                </div>
+            </div>
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Velg ...</option>
+                    <option value="1">Mamma</option>
+                    <option value="2">Pappa</option>
+                </select>
+                <label>Foreldretype</label>
+            </div>
+        }
+        <div class="row">
+            <div class="input-field col s12">
+                <input asp-for="Name" type="text" class="validate">
+                <span asp-validation-for="Name" class="text-danger" />
+                <label asp-for="Name"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="taIntro" asp-for="GroupIntro" class="materialize-textarea"></textarea>
+                <span asp-validation-for="GroupIntro" class="text-danger" />
+                <label asp-for="GroupIntro"></label>
+            </div>
+        </div>
+    </form>
+    </div>
+
+
+    @*<div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="AgeGroupId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AgeGroupId" class="form-control" asp-items="ViewBag.AgeGroupId"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GroupIntro" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="GroupIntro" class="form-control"/>
+                <span asp-validation-for="GroupIntro" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LocationId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SeekingGender" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="SeekingGender" class="form-control"></select>
+                <span asp-validation-for="SeekingGender" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>*@
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+
+                                                             }

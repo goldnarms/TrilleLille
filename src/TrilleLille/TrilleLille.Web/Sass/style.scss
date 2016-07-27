@@ -1,0 +1,54 @@
+﻿@charset "UTF-8";
+
+// Mixins
+// @import "components/prefixer";
+@import "../wwwroot/lib/materialize/sass/components/mixins";
+@import "../wwwroot/lib/materialize/sass/components/color";
+@import "color";
+// Variables;
+@import "variables";
+@import "../wwwroot/lib/materialize/sass/components/variables";
+
+// Reset
+@import "../wwwroot/lib/materialize/sass/components/normalize";
+
+// components
+@import "../wwwroot/lib/materialize/sass/components/global";
+@import "../wwwroot/lib/materialize/sass/components/icons-material-design";
+@import "../wwwroot/lib/materialize/sass/components/grid";
+@import "../wwwroot/lib/materialize/sass/components/navbar";
+@import "../wwwroot/lib/materialize/sass/components/roboto";
+@import "../wwwroot/lib/materialize/sass/components/typography";
+@import "../wwwroot/lib/materialize/sass/components/cards";
+@import "../wwwroot/lib/materialize/sass/components/toast";
+@import "../wwwroot/lib/materialize/sass/components/tabs";
+@import "../wwwroot/lib/materialize/sass/components/tooltip";
+@import "../wwwroot/lib/materialize/sass/components/buttons";
+@import "../wwwroot/lib/materialize/sass/components/dropdown";
+@import "../wwwroot/lib/materialize/sass/components/waves";
+@import "../wwwroot/lib/materialize/sass/components/modal";
+@import "../wwwroot/lib/materialize/sass/components/collapsible";
+@import "../wwwroot/lib/materialize/sass/components/chips";
+@import "../wwwroot/lib/materialize/sass/components/materialbox";
+@import "../wwwroot/lib/materialize/sass/components/forms/forms";
+@import "../wwwroot/lib/materialize/sass/components/table_of_contents";
+@import "../wwwroot/lib/materialize/sass/components/sideNav";
+@import "../wwwroot/lib/materialize/sass/components/preloader";
+@import "../wwwroot/lib/materialize/sass/components/slider";
+@import "../wwwroot/lib/materialize/sass/components/carousel";
+@import "../wwwroot/lib/materialize/sass/components/date_picker/default";
+@import "../wwwroot/lib/materialize/sass/components/date_picker/default.date";
+@import "../wwwroot/lib/materialize/sass/components/date_picker/default.time";
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+nav .brand-logo{
+    display: normal;
+    position:relative;
+    padding-right: 10px;
+}
