@@ -1,4 +1,7 @@
-﻿namespace TrilleLille.Web.Models
+﻿using Microsoft.AspNetCore.Mvc;
+using Models;
+
+namespace TrilleLille.Web.Models
 {
     public class Location
     {
@@ -6,6 +9,10 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
+
+        public int AreaId { get; set; }
+
+        public virtual Area Area { get; set; }
     }
 }

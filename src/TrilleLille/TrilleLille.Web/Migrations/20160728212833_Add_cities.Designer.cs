@@ -8,9 +8,10 @@ using TrilleLille.Web.Models;
 namespace TrilleLille.Web.Migrations
 {
     [DbContext(typeof(TrilleLilleContext))]
-    partial class TrilleLilleContextModelSnapshot : ModelSnapshot
+    [Migration("20160728212833_Add_cities")]
+    partial class Add_cities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -252,7 +253,7 @@ namespace TrilleLille.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("CIties");
                 });
 
             modelBuilder.Entity("TrilleLille.Web.Models.Event", b =>

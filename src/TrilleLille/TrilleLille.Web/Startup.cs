@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -62,14 +63,14 @@ namespace TrilleLille.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            services.AddSingleton<IMapper>(AddAutomapper());
+            services.AddSingleton<IMapper>(AddAutomapper(new HostingEnvironment()));
         }
 
-        private IMapper AddAutomapper()
+        private IMapper AddAutomapper(IHostingEnvironment env)
         {
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new MapperProfile());
+                cfg.AddProfile(new MapperProfile(env));
             });
             return mapperConfiguration.CreateMapper();
         }

@@ -1,35 +1,44 @@
 @model IEnumerable<TrilleLille.Web.Models.GroupViewModels.GroupListViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Grupper";
 }
-
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+<table class="highlight">
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <img class="circle responsive-img" width="50" height="50" src="@item.ProfileImageUrl" asp-append-version="true">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeRange)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeekingParentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatorBio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatorEmail)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatorChild)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupIntro)
+        </td>
+    </tr>
 }
     </tbody>
 </table>

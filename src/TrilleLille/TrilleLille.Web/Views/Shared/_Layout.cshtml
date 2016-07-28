@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using TrilleLille.Web.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,27 +27,62 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <nav class="" role="navigation">
-        <div class="nav-wrapper container">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="left brand-logo">TrilleLille</a>
-            <ul class="hide-on-med-and-down">
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Hjemme</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="About">Om TrilleLille</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
-            </ul>
-            <ul id="nav-mobile" class="side-nav">
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Hjemme</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="About">Om TrilleLille</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-            @await Html.PartialAsync("_LoginPartial")
-        </div>
-    </nav>
-    <div class="container body-content">
+    <header>
+        <nav class="" role="navigation">
+            <div class="nav-wrapper container">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="left brand-logo">TrilleLille</a>
+                <ul class="hide-on-med-and-down right">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Hjem</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Om oss</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt oss</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                                <li>
+                                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hei @UserManager.GetUserName(User)!</a>
+                                </li>
+                                <li>
+                                    <button type="submit">Logg av</button>
+                                </li>
+                        </form>
+                    }
+                    else
+                    {
+                            <li><a asp-area="" asp-controller="Account" asp-action="Register">Registrer deg</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Login">Logg inn</a></li>
+                    }
+
+                </ul>
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Hjem</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Om oss</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt oss</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                            <li>
+                                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hei @UserManager.GetUserName(User)!</a>
+                            </li>
+                            <li>
+                                <button type="submit">Logg av</button>
+                            </li>
+                        </form>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Register">Registrer deg</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Login">Logg inn</a></li>
+                    }
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+
+            </div>
+        </nav>
+    </header>
+    <main class="container body-content">
         @RenderBody()
-    </div>
-    <footer class="page-footer teal lighten-2">
+    </main>
+    <footer class="page-footer grey lighten-3">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -84,10 +125,12 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery">
+
         </script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 

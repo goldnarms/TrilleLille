@@ -10,101 +10,152 @@
 }
 
 <div class="row">
-    <form class="col s12" asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @if (!SignInManager.IsSignedIn(User))
-        {
-            <div class="row">
-                <div class="input-field col s12">
-                    <input asp-for="CreatorName" type="text" class="validate">
-                    <span asp-validation-for="CreatorName" class="text-danger" />
-                    <label class="active" asp-for="CreatorName"></label>
+        <form asp-controller="Group" asp-antiforgery="true" asp-action="Create" method="post" class="col s12" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <div class="card-panel teal lighten-5">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input asp-for="CreatorName" type="text" class="validate" id="creatorName">
+                            <span asp-validation-for="CreatorName" class="text-danger" />
+                            <label class="active" for="creatorName" asp-for="CreatorName"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input asp-for="CreatorEmail" type="email" class="validate">
+                            <span asp-validation-for="CreatorEmail" class="text-danger" />
+                            <label class="active" asp-for="CreatorEmail"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input asp-for="Password" type="password" class="validate">
+                            <span asp-validation-for="Password" class="text-danger" />
+                            <label class="active" asp-for="Password"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input asp-for="ConfirmPassword" type="password" class="validate">
+                            <span asp-validation-for="ConfirmPassword" class="text-danger" />
+                            <label class="active" asp-for="ConfirmPassword"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="file-field input-field col s12">
+                            <div class="btn">
+                                <span>Last opp profilbilde</span>
+                                <input asp-for="ProfileImage" class="form-control" type="file" />
+                            </div>
+                            @*<div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input asp-for="CreatorBio" type="text" class="validate">
+                            <span asp-validation-for="CreatorBio" class="text-danger" />
+                            <label class="active" asp-for="CreatorBio"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <p>
+                                <input asp-for="ParentTypeId" name="parentType" type="radio" value="0" id="mom" />
+                                <label asp-for="ParentTypeId" for="mom">Mamma</label>
+                            </p>
+                            <p>
+                                <input asp-for="ParentTypeId" name="parentType" type="radio" value="1" id="dad" />
+                                <label asp-for="ParentTypeId" for="dad">Pappa</label>
+                            </p>
+                            <label class="active" asp-for="ParentTypeId"></label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input asp-for="ChildName" type="text" class="validate">
+                            <span asp-validation-for="ChildName" class="text-danger" />
+                            <label class="active" asp-for="ChildName"></label>
+                        </div>
+                        <div class="input-field col s4">
+                            <label class="active">Som er </label>
+                            <select asp-for="ChildAgeGroupId">
+                                <option value="" disabled selected>Aldersgruppe</option>
+                                <option value="1">0 - 3 mnd</option>
+                                <option value="2">4 - 6 mnd</option>
+                                <option value="3">6 - 9 mnd</option>
+                                <option value="4">10 - 12 mnd</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="card-panel teal lighten-5">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="Name" type="text" class="validate">
+                        <span asp-validation-for="Name" class="text-danger" />
+                        <label class="active" asp-for="Name"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="taIntro" asp-for="GroupIntro" class="materialize-textarea"></textarea>
+                        <span asp-validation-for="GroupIntro" class="text-danger" />
+                        <label class="active" asp-for="GroupIntro"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <p>
+                            <input asp-for="SeekingGender" name="seekingParentType" type="radio" value="0" id="seeking_mom" />
+                            <label asp-for="SeekingGender" for="seeking_mom">M&oslashdre</label>
+                        </p>
+                        <p>
+                            <input asp-for="SeekingGender" name="seekingParentType" type="radio" value="1" id="seeking_dad" />
+                            <label asp-for="SeekingGender" for="seeking_dad">Fedre</label>
+                        </p>
+                        <p>
+                            <input asp-for="SeekingGender" name="seekingParentType" type="radio" value="2" id="seeking_both" />
+                            <label asp-for="SeekingGender" for="seeking_both">M&oslash;dre og fedre</label>
+                        </p>
+                        <label class="active" asp-for="SeekingGender"></label>
+                    </div>
+                    <div class="input-field col s6">
+                        <label class="active">Med barn i alderen: </label>
+                        <select asp-for="SeekingAgeGroupId">
+                            <option value="" disabled selected>Aldersgruppe</option>
+                            <option value="1">0 - 3 mnd</option>
+                            <option value="2">4 - 6 mnd</option>
+                            <option value="3">6 - 9 mnd</option>
+                            <option value="4">10 - 12 mnd</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="ZipCode" type="text" class="validate">
+                        <span asp-validation-for="ZipCode" class="text-danger" />
+                        <label class="active" asp-for="ZipCode"></label>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input asp-for="CreatorBio" type="text" class="validate">
-                    <span asp-validation-for="CreatorBio" class="text-danger" />
-                    <label class="active" asp-for="CreatorBio"></label>
+                    <button class="btn waves-effect right waves-light" type="submit" name="action">
+                        Opprett gruppe
+                        <i class="material-icons right">send</i>
+                    </button>
                 </div>
             </div>
-            <div class="input-field col s12">
-                <select>
-                    <option value="" disabled selected>Velg ...</option>
-                    <option value="1">Mamma</option>
-                    <option value="2">Pappa</option>
-                </select>
-                <label class="active" >Foreldretype</label>
-            </div>
-        }
-        <div class="row">
-            <div class="input-field col s12">
-                <input asp-for="Name" type="text" class="validate">
-                <span asp-validation-for="Name" class="text-danger" />
-                <label asp-for="Name"></label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="taIntro" asp-for="GroupIntro" class="materialize-textarea"></textarea>
-                <span asp-validation-for="GroupIntro" class="text-danger" />
-                <label class="active" asp-for="GroupIntro"></label>
-            </div>
-        </div>
-    </form>
-    </div>
-
-
-    @*<div class="form-horizontal">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="AgeGroupId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="AgeGroupId" class="form-control" asp-items="ViewBag.AgeGroupId"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="GroupIntro" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="GroupIntro" class="form-control"/>
-                <span asp-validation-for="GroupIntro" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="LocationId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control"/>
-                <span asp-validation-for="Name" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="SeekingGender" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="SeekingGender" class="form-control"></select>
-                <span asp-validation-for="SeekingGender" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
-            </div>
-        </div>
-    </div>*@
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </form>
 </div>
-
 @section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-  $(document).ready(function() {
-    $('select').material_select();
-  });
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+    </script>
 }

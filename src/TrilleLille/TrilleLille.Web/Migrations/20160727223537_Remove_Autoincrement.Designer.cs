@@ -8,9 +8,10 @@ using TrilleLille.Web.Models;
 namespace TrilleLille.Web.Migrations
 {
     [DbContext(typeof(TrilleLilleContext))]
-    partial class TrilleLilleContextModelSnapshot : ModelSnapshot
+    [Migration("20160727223537_Remove_Autoincrement")]
+    partial class Remove_Autoincrement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -123,22 +124,6 @@ namespace TrilleLille.Web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Models.Area", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CityId");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("Areas");
-                });
-
             modelBuilder.Entity("TrilleLille.Web.Models.Activity", b =>
                 {
                     b.Property<int>("Id")
@@ -243,18 +228,6 @@ namespace TrilleLille.Web.Migrations
                     b.ToTable("Children");
                 });
 
-            modelBuilder.Entity("TrilleLille.Web.Models.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cities");
-                });
-
             modelBuilder.Entity("TrilleLille.Web.Models.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -288,23 +261,21 @@ namespace TrilleLille.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ChildId");
+                    b.Property<int>("AgeGroupId");
 
                     b.Property<string>("CreatorId");
 
                     b.Property<string>("GroupIntro");
 
-                    b.Property<bool>("IsActive");
-
-                    b.Property<bool>("IsDeleted");
-
                     b.Property<int>("LocationId");
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("SeekingGender");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ChildId");
+                    b.HasIndex("AgeGroupId");
 
                     b.HasIndex("CreatorId");
 
@@ -324,21 +295,17 @@ namespace TrilleLille.Web.Migrations
 
                     b.Property<string>("CreatorChild");
 
-                    b.Property<string>("CreatorEmail");
-
                     b.Property<string>("CreatorId");
 
                     b.Property<string>("CreatorName");
 
                     b.Property<string>("GroupIntro");
 
+                    b.Property<string>("LocationName");
+
                     b.Property<string>("Name");
 
-                    b.Property<string>("ProfileImageUrl");
-
-                    b.Property<int>("SeekingParentType");
-
-                    b.Property<string>("ZipCode");
+                    b.Property<string>("ParentType");
 
                     b.HasKey("Id");
 
@@ -350,17 +317,13 @@ namespace TrilleLille.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AreaId");
-
                     b.Property<double>("Latitude");
 
                     b.Property<double>("Longitude");
 
-                    b.Property<string>("ZipCode");
+                    b.Property<int>("ZipCode");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AreaId");
 
                     b.ToTable("Locations");
                 });
@@ -402,14 +365,6 @@ namespace TrilleLille.Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Models.Area", b =>
-                {
-                    b.HasOne("TrilleLille.Web.Models.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("TrilleLille.Web.Models.Child", b =>
                 {
                     b.HasOne("TrilleLille.Web.Models.ApplicationUser", "Parent")
@@ -436,9 +391,9 @@ namespace TrilleLille.Web.Migrations
 
             modelBuilder.Entity("TrilleLille.Web.Models.Group", b =>
                 {
-                    b.HasOne("TrilleLille.Web.Models.Child", "Child")
+                    b.HasOne("TrilleLille.Web.Models.AgeGroup", "AgeGroup")
                         .WithMany()
-                        .HasForeignKey("ChildId")
+                        .HasForeignKey("AgeGroupId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TrilleLille.Web.Models.ApplicationUser", "Creator")
@@ -448,14 +403,6 @@ namespace TrilleLille.Web.Migrations
                     b.HasOne("TrilleLille.Web.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TrilleLille.Web.Models.Location", b =>
-                {
-                    b.HasOne("Models.Area", "Area")
-                        .WithMany()
-                        .HasForeignKey("AreaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

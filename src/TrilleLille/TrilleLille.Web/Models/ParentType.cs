@@ -3,6 +3,7 @@
     public enum ParentType
     {
         Mother,
-        Father
+        Father,
+        Both
     }
 }

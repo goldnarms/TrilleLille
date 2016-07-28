@@ -14,7 +14,7 @@ namespace TrilleLille.Web.Models
         public string Bio { get; set; }
         public DateTime BirthDate { get; set; }
         public string ProfileImageUrl { get; set; }
-        public virtual IEnumerable<Child> Children { get; set; }
+        public virtual ICollection<Child> Children { get; set; }
 
     }
 }

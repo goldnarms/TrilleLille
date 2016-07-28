@@ -8,9 +8,10 @@ using TrilleLille.Web.Models;
 namespace TrilleLille.Web.Migrations
 {
     [DbContext(typeof(TrilleLilleContext))]
-    partial class TrilleLilleContextModelSnapshot : ModelSnapshot
+    [Migration("20160728213918_Seed")]
+    partial class Seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
