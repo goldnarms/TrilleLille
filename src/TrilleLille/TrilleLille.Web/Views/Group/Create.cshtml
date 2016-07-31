@@ -6,12 +6,12 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "TrilleLille - Opprett gruppe";
 }
 
 <div class="row">
         <form asp-controller="Group" asp-antiforgery="true" asp-action="Create" method="post" class="col s12" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             @if (!SignInManager.IsSignedIn(User))
             {
                 <div class="card-panel teal lighten-5">

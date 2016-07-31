@@ -1,24 +1,58 @@
-@model TrilleLille.Web.Models.Group
+@model GroupDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Name;
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Group</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
+@section stylesheets{
+<environment names="Development">
+    <link rel="stylesheet" href="~/css/Pages/details.css" />
+    </environment>
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="~/css/Pages/details.min.css" />
+</environment>    
+}
+<div class="intro teal lighten-4 z-depth-1">
+    <h1 class="grey-text text-lighten-5">@Model.Name</h1>
+    <h5 clas="grey lighten-4 grey-text text-darken-1">@Model.LocationArea, @Model.LocationCity</h5>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container about">
+    <h5>Ta kontakt med @Model.CreatorName</h5>
+    <div class="center">
+        <a data-id="@Model.Id" id="btnJoin" class="btn btn-large waves-effect waves-light cyan lighten-2">Bli med</a>
+    </div>
+    <br/><br/>
+    <hr/>
+    <div class="row">
+        <div class="col s12 m4 l4">
+            <h6>Om @Model.Name</h6>
+            <p>
+                @Model.GroupIntro
+            </p>
+        </div>
+        <div class="col s12 m4 l4">
+            <h6>@Model.CreatorName</h6>
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <img class="circle" src="@Model.CreatorProfileImageUrl" width="64" height="64">
+                    <p>@Model.CreatorBio</p>
+                </div>
+                <div class="card-action">
+                    <a href="mailto:@Model.CreatorEmail">Kontakt</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 l4">
+            <h6>Informasjon</h6>
+            <p><strong>Oppstart: </strong>@Model.FirstMeeting.ToString("d")</p>
+            <p>
+                <strong>Passer for: </strong>@Model.SeekingParentType
+            </p>
+            <p>
+                <strong>Aldersgruppe: </strong>@Model.AgeGroup
+            </p>
+        </div>
+    </div>
 </div>
+@section scripts{
+    <script src="~/js/groupDetails.min.js"></script>
+}

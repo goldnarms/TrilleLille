@@ -1,0 +1,8 @@
+{
+  "name": "trillelille",
+  "dependencies": {},
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20160704162008",
+    "materialize-css": "registry:dt/materialize-css#0.97.5+20160628040906"
+  }
+}

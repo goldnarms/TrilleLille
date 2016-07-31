@@ -1,0 +1,24 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<li><a asp-area="" asp-controller="Home" asp-action="Index">Hjem</a></li>
+<li><a asp-area="" asp-controller="Home" asp-action="About">Om oss</a></li>
+<li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt oss</a></li>
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" style="display: inline">
+        <li>
+            <a id="sidenavBtn" data-activates="slide-out">@UserManager.GetUserName(User)!</a>
+        </li>
+        <li>
+            <button type="submit" class="btn btn-flat white-text">Logg av</button>
+        </li>
+    </form>
+}
+else
+{
+    <li><a asp-area="" asp-controller="Account" asp-action="Register">Registrer deg</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Login">Logg inn</a></li>
+}

@@ -62,6 +62,7 @@ namespace TrilleLille.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<ISideMenuService, SideMenuService>();
 
             services.AddSingleton<IMapper>(AddAutomapper(new HostingEnvironment()));
         }

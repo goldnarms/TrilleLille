@@ -8,9 +8,10 @@ using TrilleLille.Web.Models;
 namespace TrilleLille.Web.Migrations
 {
     [DbContext(typeof(TrilleLilleContext))]
-    partial class TrilleLilleContextModelSnapshot : ModelSnapshot
+    [Migration("20160730150215_User_Groups")]
+    partial class User_Groups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -292,8 +293,6 @@ namespace TrilleLille.Web.Migrations
 
                     b.Property<string>("CreatorId");
 
-                    b.Property<DateTime>("FirstMeeting");
-
                     b.Property<string>("GroupIntro");
 
                     b.Property<bool>("IsActive");
@@ -315,7 +314,7 @@ namespace TrilleLille.Web.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("TrilleLille.Web.Models.GroupMember", b =>
+            modelBuilder.Entity("TrilleLille.Web.Models.GroupMembers", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -337,6 +336,40 @@ namespace TrilleLille.Web.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("GroupMembers");
+                });
+
+            modelBuilder.Entity("TrilleLille.Web.Models.GroupViewModels.GroupListViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AgeRange");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("CreatorBio");
+
+                    b.Property<string>("CreatorChild");
+
+                    b.Property<string>("CreatorEmail");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("CreatorName");
+
+                    b.Property<string>("GroupIntro");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("ProfileImageUrl");
+
+                    b.Property<int>("SeekingParentType");
+
+                    b.Property<string>("ZipCode");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GroupListViewModel");
                 });
 
             modelBuilder.Entity("TrilleLille.Web.Models.Location", b =>
@@ -445,7 +478,7 @@ namespace TrilleLille.Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TrilleLille.Web.Models.GroupMember", b =>
+            modelBuilder.Entity("TrilleLille.Web.Models.GroupMembers", b =>
                 {
                     b.HasOne("TrilleLille.Web.Models.Group", "Group")
                         .WithMany("GroupMembers")

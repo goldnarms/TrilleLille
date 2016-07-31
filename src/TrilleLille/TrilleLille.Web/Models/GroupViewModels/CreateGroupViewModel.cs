@@ -47,7 +47,6 @@ namespace TrilleLille.Web.Models.GroupViewModels
         [Display(Name = "Søker andre på postnummer")]
         public string ZipCode { get; set; }
 
-        [Required(ErrorMessage = "Ugyldig filtype")]
         [DataType(DataType.Upload)]
         [Display(Name = "Last opp profilbilde")]
         [FileExtensions(Extensions = "jpg,png,gif,jpeg,bmp")]

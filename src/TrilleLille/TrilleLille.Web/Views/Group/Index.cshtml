@@ -3,42 +3,35 @@
 @{
     ViewData["Title"] = "Grupper";
 }
-<table class="highlight">
-    <tbody>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <img class="circle responsive-img" width="50" height="50" src="@item.ProfileImageUrl" asp-append-version="true">
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgeRange)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SeekingParentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatorBio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatorEmail)
-        </td>
+<div class="row">
+    @foreach (var item in Model)
+    {
 
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatorChild)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GroupIntro)
-        </td>
-    </tr>
-}
-    </tbody>
-</table>
+        <div class="col s6">
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img width="250" height="250" src="@item.ProfileImageUrl" asp-append-version="true">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <h5>@item.Name</h5>
+                        </a>
+                        <article>
+                            @item.GroupIntro
+                        </article>
+                        <strong>Postnummer:</strong> @item.ZipCode <br />
+                        <p>
+                            @item.CreatorBio
+                        </p>
+                        <strong>Barn: </strong>@item.CreatorChild
+                    </div>
+                    <div class="card-action">
+                        <a asp-action="JoinGroup" asp-route-id="@item.Id">Bli med</a>
+                        <a href="mailto:@item.CreatorEmail">Kontakt @item.CreatorName</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

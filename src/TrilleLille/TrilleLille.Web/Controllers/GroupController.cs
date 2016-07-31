@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using ImageProcessorCore;
+using ImageProcessorCore.Processors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,8 +18,10 @@ using Models;
 using TrilleLille.Web.Models;
 using TrilleLille.Web.Models.GroupViewModels;
 
-namespace TrilleLille.Web.Controllers {
-    public class GroupController: Controller {
+namespace TrilleLille.Web.Controllers
+{
+    public class GroupController : Controller
+    {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -32,6 +37,7 @@ namespace TrilleLille.Web.Controllers {
             _signInManager = signInManager;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var groups = await _trilleLilleContext.Groups
@@ -44,7 +50,8 @@ namespace TrilleLille.Web.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Create(){
+        public IActionResult Create()
+        {
             return View();
         }
 
@@ -57,7 +64,7 @@ namespace TrilleLille.Web.Controllers {
                 return View(viewModel);
             }
             var user = await GetCurrentUserAsync();
-            var child = new Child {Name = viewModel.ChildName};
+            var child = new Child { Name = viewModel.ChildName };
             if (user == null)
             {
                 var imageName = "";
@@ -68,11 +75,9 @@ namespace TrilleLille.Web.Controllers {
                     var extension = Path.GetExtension(path);
                     var uploadDir = _hostingEnvironment.WebRootPath + $@"\Uploads\Images\";
                     imageName = Guid.NewGuid() + extension;
-                    var imageUrl = uploadDir + imageName;
-                    using (var stream = new FileStream(imageUrl, FileMode.CreateNew))
-                    {
-                        await profileImage.CopyToAsync(stream);
-                    }
+                    var imageUrl = uploadDir + "{0}" + imageName;
+                    ResizeAndSaveImage(profileImage, string.Format(imageUrl, "_small"), 250);
+                    ResizeAndSaveImage(profileImage, string.Format(imageUrl, "_large"), 1024);
                 }
                 user = new ApplicationUser
                 {
@@ -82,7 +87,7 @@ namespace TrilleLille.Web.Controllers {
                     Name = viewModel.CreatorName,
                     ProfileImageUrl = imageName,
                     Children = new List<Child> { child },
-                    ParentType = (ParentType) Enum.ToObject(typeof(ParentType), viewModel.ParentTypeId),
+                    ParentType = (ParentType)Enum.ToObject(typeof(ParentType), viewModel.ParentTypeId),
                 };
                 var result = await _userManager.CreateAsync(user, viewModel.Password);
                 if (result.Succeeded)
@@ -128,22 +133,49 @@ namespace TrilleLille.Web.Controllers {
 
             _trilleLilleContext.Groups.Add(model);
             await _trilleLilleContext.SaveChangesAsync();
-            return RedirectToAction("Details", new {id = model.Id});
+            return RedirectToAction("Details", new { id = model.Id });
         }
 
+        [HttpGet]
+        [Route("group/{id:int}")]
         public async Task<IActionResult> Details(int id)
         {
-            var group = await _trilleLilleContext.Groups.SingleOrDefaultAsync(g => g.Id == id);
-            return View(group);
+            var group = await _trilleLilleContext.Groups
+                .Include(g => g.Creator)
+                .Include(g => g.Location.Area).ThenInclude(a => a.City)
+                .SingleOrDefaultAsync(g => g.Id == id);
+            var viewModel = _mapper.Map<GroupDetailsViewModel>(group);
+            return View("Details", viewModel);
         }
 
         [Authorize]
-        public IActionResult JoinGroup(int id){
-            return View();
+        public async Task<IActionResult> JoinGroup(int id)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                var group = await _trilleLilleContext.Groups
+                    .SingleOrDefaultAsync(g => g.Id == id);
+                if(user.GroupMembers == null)
+                    user.GroupMembers = new List<GroupMember>();
+                user.GroupMembers.Add(new GroupMember
+                {
+                    DateJoined = DateTime.Now,
+                    IsActive = true,
+                    IsAdmin = false,
+                    User = user,
+                    Group = group
+                });
+                _trilleLilleContext.Users.Update(user);
+                await _trilleLilleContext.SaveChangesAsync();
+                return RedirectToAction("Details", group.Id);
+            }
+            return new EmptyResult();
         }
 
         [Authorize]
-        public IActionResult LeaveGroup(int id){
+        public IActionResult LeaveGroup(int id)
+        {
             return View();
         }
 
@@ -152,5 +184,19 @@ namespace TrilleLille.Web.Controllers {
             return _userManager.GetUserAsync(HttpContext.User);
         }
 
+        private static void ResizeAndSaveImage(IFormFile inputFile, string fileUrl, double maxDimmension)
+        {
+            using (var outPutStream = System.IO.File.OpenWrite(fileUrl))
+            {
+                var image = new Image(inputFile.OpenReadStream());
+                var isHeigtMin = image.Height < image.Width;
+                var factor = maxDimmension / (isHeigtMin ? image.Height : image.Width);
+                var maxInt = (int)maxDimmension;
+                image
+                    .Resize((int)Math.Round(image.Width * factor, 0), (int)Math.Round(image.Height * factor, 0))
+                    .Crop(maxInt, maxInt)
+                    .Save(outPutStream);
+            }
+        }
     }
 }

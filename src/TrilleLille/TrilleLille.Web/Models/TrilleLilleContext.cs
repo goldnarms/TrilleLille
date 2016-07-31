@@ -23,9 +23,8 @@ namespace TrilleLille.Web.Models
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<AgeGroup> AgeGroups { get; set; }
-        public DbSet<GroupListViewModel> GroupListViewModel { get; set; }
-
         public DbSet<Area> Areas { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<GroupMember> GroupMembers { get; set; }
     }
 }

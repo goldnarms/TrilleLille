@@ -23,10 +23,14 @@ namespace TrilleLille.Web.Models
 
         public int ChildId { get; set; }
 
+        public DateTime FirstMeeting { get; set; }
+
         public virtual Location Location { get; set; }
 
         public virtual ApplicationUser Creator { get; set; }
 
         public virtual Child Child { get; set; }
+
+        public virtual ICollection<GroupMember> GroupMembers { get; set; }
     }
 }

@@ -16,5 +16,7 @@ namespace TrilleLille.Web.Models
         public string ProfileImageUrl { get; set; }
         public virtual ICollection<Child> Children { get; set; }
 
+        public virtual ICollection<GroupMember> GroupMembers { get; set; }
+
     }
 }
