@@ -11,5 +11,10 @@ namespace TrilleLille.Web.Models.AccountViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
+        public string Gender { get; set; }
+        public string Name { get; set; }
     }
 }

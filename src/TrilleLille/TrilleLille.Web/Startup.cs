@@ -98,11 +98,26 @@ namespace TrilleLille.Web
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
-            app.UseFacebookAuthentication(new FacebookOptions()
+            var facebookOptions = new FacebookOptions()
             {
-                AppId = env.IsDevelopment() ? Configuration["Authentication:Facebook:AppId_Dev"] : Configuration["Authentication:Facebook:AppId"],
-                AppSecret = env.IsDevelopment() ? Configuration["Authentication:Facebook:AppSecret_Dev"]: Configuration["Authentication:Facebook:AppSecret"]
-            });
+                AppId =
+                    env.IsDevelopment()
+                        ? Configuration["Authentication:Facebook:AppId_Dev"]
+                        : Configuration["Authentication:Facebook:AppId"],
+                AppSecret =
+                    env.IsDevelopment()
+                        ? Configuration["Authentication:Facebook:AppSecret_Dev"]
+                        : Configuration["Authentication:Facebook:AppSecret"]
+            };
+            facebookOptions.Scope.Add("user_birthday");
+            facebookOptions.Scope.Add("public_profile");
+            facebookOptions.Fields.Add("birthday");
+            facebookOptions.Fields.Add("email");
+            facebookOptions.Fields.Add("picture");
+            facebookOptions.Fields.Add("gender");
+            //facebookOptions.Fields.Add("public_profile");
+            //facebookOptions.Fields.Add("public_profile.picture");
+            app.UseFacebookAuthentication(facebookOptions);
 
 
             app.UseMvc(routes =>

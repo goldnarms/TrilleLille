@@ -187,8 +187,12 @@ namespace TrilleLille.Web.Controllers
                 // If the user does not have an account, then ask the user to create an account.
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
+                var email = "";//info.Principal.FindFirstValue(ClaimTypes.Email);
+                var gender = "";//info.Principal.FindFirstValue(ClaimTypes.Gender);
+                var name = "";//info.Principal.FindFirstValue(ClaimTypes.Name);
+                var birthdate = DateTime.Today;//DateTime.Parse(info.Principal.FindFirstValue(ClaimTypes.DateOfBirth));
+
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email, BirthDate = birthdate, Gender = gender, Name = name});
             }
         }
 
@@ -207,7 +211,7 @@ namespace TrilleLille.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BirthDate = model.BirthDate, ParentType = model.Gender.ToLower() =="male" ? ParentType.Father : ParentType.Mother};
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
