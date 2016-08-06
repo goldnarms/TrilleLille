@@ -10,11 +10,16 @@ namespace TrilleLille.Web.Models.AccountViewModels
     {
         [Required]
         [EmailAddress]
+        [Display(Name="E-post")]
         public string Email { get; set; }
 
+        [Display(Name="Fødselsdato")]
         public DateTime BirthDate { get; set; }
 
+        [Display(Name="Jeg er ")]
         public string Gender { get; set; }
+
+        [Display(Name="Navn")]
         public string Name { get; set; }
     }
 }
