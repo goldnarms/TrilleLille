@@ -50,6 +50,7 @@ namespace TrilleLille.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();

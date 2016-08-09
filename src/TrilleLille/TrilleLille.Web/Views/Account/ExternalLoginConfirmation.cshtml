@@ -3,52 +3,53 @@
     ViewData["Title"] = "Koble til";
 }
 
-<h3>Koble til din @ViewData["LoginProvider"] konto.</h3>
+<h4>Koble til din @ViewData["LoginProvider"] konto.</h4>
 
 <form asp-controller="Account" asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
     <div asp-validation-summary="All" class="text-danger"></div>
-
-    <p class="text-info">
-        Du er nå koblet til <strong>@ViewData["LoginProvider"]</strong>.
-        Bekreft opplysningene og klikk registrer for å komme igang.
-    </p>
-                         <div class="row">
-                        <div class="input-field col s12">
-                            <input asp-for="Email" type="text" class="validate" id="email">
-                            <span asp-validation-for="Email" class="text-danger" />
-                            <label class="active" for="email" asp-for="Email"></label>
-                        </div>
-                    </div>
-                         <div class="row">
-                        <div class="input-field col s12">
-                            <input asp-for="BirthDate" type="text" class="validate" id="birthdate">
-                            <span asp-validation-for="BirthDate" class="text-danger" />
-                            <label class="active" for="birthdate" asp-for="BirthDate"></label>
-                        </div>
-                    </div>
-                         <div class="row">
-                        <div class="input-field col s12">
-                            <input asp-for="Gender" type="text" class="validate" id="gender">
-                            <span asp-validation-for="Gender" class="text-danger" />
-                            <label class="active" for="gender" asp-for="Gender"></label>
-                        </div>
-                    </div>
-                         <div class="row">
-                        <div class="input-field col s12">
-                            <input asp-for="Name" type="text" class="validate" id="name">
-                            <span asp-validation-for="Name" class="text-danger" />
-                            <label class="active" for="name" asp-for="Name"></label>
-                        </div>
-                    </div>
-                    
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn waves-effect right waves-light" type="submit" name="action">
-                        Registrer
-                        <i class="material-icons right">send</i>
-                    </button>
-                </div>
+    <div class="card-panel teal lighten-5">
+        <p class="text-info">
+            Du er nå koblet til <strong>@ViewData["LoginProvider"]</strong>.
+            Bekreft opplysningene og klikk registrer for å komme igang.
+        </p>
+        <div class="row">
+            <div class="input-field col s12">
+                <input asp-for="Email" type="text" class="validate" id="email">
+                <span asp-validation-for="Email" class="text-danger" />
+                <label class="active" for="email" asp-for="Email"></label>
             </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input asp-for="BirthDate" type="text" class="validate" id="birthdate">
+                <span asp-validation-for="BirthDate" class="text-danger" />
+                <label class="active" for="birthdate" asp-for="BirthDate"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input asp-for="Gender" type="text" class="validate" id="gender">
+                <span asp-validation-for="Gender" class="text-danger" />
+                <label class="active" for="gender" asp-for="Gender"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input asp-for="Name" type="text" class="validate" id="name">
+                <span asp-validation-for="Name" class="text-danger" />
+                <label class="active" for="name" asp-for="Name"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn waves-effect right waves-light" type="submit" name="action">
+                    Registrer
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </div>
 </form>
 
 @section Scripts {

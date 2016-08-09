@@ -1,0 +1,12 @@
+
+@{
+    ViewData["Title"] = "AccessDenied";
+}
+
+<h2>Tilgang nektet</h2>
+
+<a asp-controller="Home" asp-action="Index">G&aring; tilbake</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

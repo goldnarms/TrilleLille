@@ -187,10 +187,11 @@ namespace TrilleLille.Web.Controllers
                 // If the user does not have an account, then ask the user to create an account.
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
-                var email = "";//info.Principal.FindFirstValue(ClaimTypes.Email);
-                var gender = "";//info.Principal.FindFirstValue(ClaimTypes.Gender);
-                var name = "";//info.Principal.FindFirstValue(ClaimTypes.Name);
-                var birthdate = DateTime.Today;//DateTime.Parse(info.Principal.FindFirstValue(ClaimTypes.DateOfBirth));
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                var gender = info.Principal.FindFirstValue(ClaimTypes.Gender);
+                var name = info.Principal.FindFirstValue(ClaimTypes.Name);
+                var location = info.Principal.FindFirstValue(ClaimTypes.Locality);
+                var birthdate = DateTime.Parse(info.Principal.FindFirstValue(ClaimTypes.DateOfBirth));
 
                 return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email, BirthDate = birthdate, Gender = gender, Name = name});
             }
@@ -253,6 +254,14 @@ namespace TrilleLille.Web.Controllers
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied(string returnUrl = null)
         {
             return View();
         }

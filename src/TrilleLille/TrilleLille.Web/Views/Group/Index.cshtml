@@ -4,34 +4,112 @@
     ViewData["Title"] = "Grupper";
 }
 <div class="row">
-    @foreach (var item in Model)
-    {
-
-        <div class="col s6">
-            <div class="card horizontal">
-                <div class="card-image">
-                    <img width="250" height="250" src="@item.ProfileImageUrl" asp-append-version="true">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <a asp-action="Details" asp-route-id="@item.Id">
-                            <h5>@item.Name</h5>
-                        </a>
-                        <article>
-                            @item.GroupIntro
-                        </article>
-                        <strong>Postnummer:</strong> @item.ZipCode <br />
-                        <p>
-                            @item.CreatorBio
-                        </p>
-                        <strong>Barn: </strong>@item.CreatorChild
-                    </div>
-                    <div class="card-action">
-                        <a asp-action="JoinGroup" asp-route-id="@item.Id">Bli med</a>
-                        <a href="mailto:@item.CreatorEmail">Kontakt @item.CreatorName</a>
-                    </div>
+    <div id="search-wrapper" class="col hide-on-med-and-down" style="width: calc((100% - 1344px) / 2);">
+        <div class="row">
+            <div class="col s12 m12 l10">
+                <div class="card-panel teal">
+                    <span class="white-text">
+                        <strong>Søkekriterier:</strong>
+                        <form>
+                            <ul>
+                                <li><strong>By</strong></li>
+                                <li><input type="checkbox" id="by1" /><label for="by1">Trondheim</label></li>
+                                <li><input type="checkbox" id="by2" /><label for="by2">Oslo</label></li>
+                                <li><strong>Aldersgrupp</strong></li>
+                                <li><input type="checkbox" id="test5" /><label for="test5">0-4 måneder</label></li>
+                            </ul>
+                        </form>
+                    </span>
                 </div>
             </div>
         </div>
-    }
+    </div>
+    <div id="search-wrapper2" class="col s12 hide-on-med-and-up">
+        <div class="row">
+            <div class="col s12 m12 l10">
+                <div class="card-panel teal">
+                    <span class="white-text">
+                        <strong>Søkekriterier:</strong>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col" style="width: 1280px; margin: 0 auto;">
+        <div class="row hide-on-med-and-up">
+            @foreach (var item in Model)
+            {
+
+            <div class="col s12">
+                <div class="card horizontal">
+                    <div class="card-image">
+                        <img width="250" height="250" src="@item.ProfileImageUrl" asp-append-version="true">
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <a asp-action="Details" asp-route-id="@item.Id">
+                                <h5>@item.Name</h5>
+                            </a>
+                            <article>
+                                @item.GroupIntro
+                            </article>
+                            <strong>Postnummer:</strong> @item.ZipCode <br />
+                            <p>
+                                @item.CreatorBio
+                            </p>
+                            <strong>Barn: </strong>@item.CreatorChild
+                        </div>
+                        <div class="card-action">
+                            <a asp-action="JoinGroup" asp-route-id="@item.Id">Bli med</a>
+                            <a href="mailto:@item.CreatorEmail">Kontakt @item.CreatorName</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <ul class="collapsible popout hide-on-small-and-down" data-collapsible="accordion">
+            @foreach (var item in Model)
+            {
+            <li class="collection-item avatar">
+                <div class="collapsible-header">
+                    <div class="row">
+                        <div class="col m2 l1">
+                            <img src="@item.ProfileImageUrl" width="50" height="50" alt="" class="circle" asp-append-version="true">
+                        </div>
+                        <div class="col m10 l5">
+                            <strong>Gruppe: </strong><a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                        </div>
+                        <div class="col m12 l2">
+                            <strong>Postnummer:</strong> @item.ZipCode
+                        </div>
+                        <div class="col m12 l2">
+                            <strong>Passer for:</strong> Begge
+                        </div>
+                        <div class="col m12 l2">
+                            <strong>Aldersgruppe:</strong> 0-4 mnd
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <p>
+                        <strong>Om @item.Name</strong><br />
+                        @item.GroupIntro
+                    </p>
+                    <p>
+                        <strong>Om @item.CreatorName</strong><br />
+                        @item.CreatorBio
+                    </p>
+                    <p><strong>Barn: </strong>@item.CreatorChild</p>
+                    <a asp-action="JoinGroup" asp-route-id="@item.Id" class="secondary-content">Bli med</a>
+                </div>
+            </li>
+            }
+        </ul>
+    </div>
+    <div class="col" style="width: 15%">
+        &nbsp;
+    </div>
 </div>

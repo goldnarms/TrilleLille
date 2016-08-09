@@ -9,7 +9,7 @@
     ViewData["Title"] = "TrilleLille - Opprett gruppe";
 }
 
-<div class="row">
+<div class="row container">
         <form asp-controller="Group" asp-antiforgery="true" asp-action="Create" method="post" class="col s12" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
             @if (!SignInManager.IsSignedIn(User))

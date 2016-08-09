@@ -42,7 +42,7 @@ namespace TrilleLille.Web.Config
                     .Select(gm => new KeyValuePair<int, string>(gm.GroupId, gm.Group?.Name))
                     .ToDictionary(kvm => kvm.Key, kvm => kvm.Value))
                 .AfterMap((s, d) => d.UserId = s.Id)
-                .AfterMap((s, d) => d.UserProfileUrl =
+                .AfterMap((s, d) => d.UserProfileUrl = string.IsNullOrEmpty(s.ProfileImageUrl) ? "" : 
                             (hostingEnvironment.WebRootPath + $@"\Uploads\Images\" +
                              string.Format(s?.ProfileImageUrl, "_small")));
         }
