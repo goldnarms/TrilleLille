@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -191,7 +192,19 @@ namespace TrilleLille.Web.Controllers
                 var gender = info.Principal.FindFirstValue(ClaimTypes.Gender);
                 var name = info.Principal.FindFirstValue(ClaimTypes.Name);
                 var location = info.Principal.FindFirstValue(ClaimTypes.Locality);
-                var birthdate = DateTime.Parse(info.Principal.FindFirstValue(ClaimTypes.DateOfBirth));
+                var postalCode = info.Principal.FindFirstValue(ClaimTypes.PostalCode);
+                var state = info.Principal.FindFirstValue(ClaimTypes.StateOrProvince);
+                var userData = info.Principal.FindFirstValue(ClaimTypes.UserData);
+                var street = info.Principal.FindFirstValue(ClaimTypes.StreetAddress);
+                var bdValue = info.Principal.FindFirstValue(ClaimTypes.DateOfBirth);
+                DateTime birthdate;
+                if (
+                    !DateTime.TryParseExact(bdValue, "MM/dd/yyyy", CultureInfo.InvariantCulture,
+                        DateTimeStyles.AllowTrailingWhite, out birthdate))
+                {
+                    DateTime.TryParse(bdValue, out birthdate);
+                }
+                
 
                 return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email, BirthDate = birthdate, Gender = gender, Name = name});
             }

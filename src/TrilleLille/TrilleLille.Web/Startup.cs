@@ -110,6 +110,7 @@ namespace TrilleLille.Web
                         : Configuration["Authentication:Facebook:AppSecret"]
             };
             facebookOptions.Scope.Add("user_birthday");
+            facebookOptions.Scope.Add("user_location");
             facebookOptions.Scope.Add("public_profile");
             facebookOptions.Fields.Add("birthday");
             facebookOptions.Fields.Add("email");
