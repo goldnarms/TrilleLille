@@ -1,0 +1,15 @@
+.massive {
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  vertical-align: middle;
+  justify-content: center; }
+
+.email-login {
+  align-self: center;
+  color: #7C7C7C;
+  background-color: #EEEEEE; }
+  .email-login:active {
+    color: black; }
+  .email-login:hover {
+    background-color: #DFDFDF; }

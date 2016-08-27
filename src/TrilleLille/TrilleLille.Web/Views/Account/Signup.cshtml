@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section stylesheets{
+    <link rel="stylesheet" href="~/css/Pages/signup.css" />
+}
+
+<div class="container">
+    <article>
+        <header>
+            <h1>Bli en del av TrilleLille</h1>
+            <p class="signIn flow-text">
+                Har du allerede en konto? <a asp-controller="Account" asp-action="Login">Logg inn</a>.
+            </p>
+        </header>
+        <div class="row">
+            <div class="col hide-on-small-and-down m2"></div>
+            <div class="col s6 m4 center">
+                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                        <button class="facebook massive" type="submit" name="provider" value="Facebook" title="Logg inn med din Facebbok konto">
+                            <i class="fa fa-facebook fa-5x" aria-hidden="true"></i>
+                        </button>
+                </form>
+            </div>
+            <div class="col s6 m4 valign-wrapper" style="justify-content: center">
+                <div class="valign" style="width: 100%;margin: auto">
+                    <a class="email-login massive valign-wrapper" asp-controller="Account" asp-action="Register" title="Registrer deg med e-post">
+                        <i class="fa fa-envelope fa-5x valign" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col hide-on-small-and-down m2"></div>
+        </div>
+    </article>
+</div>

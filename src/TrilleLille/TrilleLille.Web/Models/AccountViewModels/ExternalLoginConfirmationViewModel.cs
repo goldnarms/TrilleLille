@@ -17,9 +17,10 @@ namespace TrilleLille.Web.Models.AccountViewModels
         public DateTime BirthDate { get; set; }
 
         [Display(Name="Jeg er ")]
-        public string Gender { get; set; }
+        public string Parent { get; set; }
 
         [Display(Name="Navn")]
         public string Name { get; set; }
+
     }
 }

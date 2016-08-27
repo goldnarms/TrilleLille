@@ -63,6 +63,7 @@ namespace TrilleLille.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<ISideMenuService, SideMenuService>();
+            services.AddTransient<IRssReader, RssReader>();
 
             services.AddSingleton<IMapper>(AddAutomapper(new HostingEnvironment()));
         }
@@ -112,6 +113,7 @@ namespace TrilleLille.Web
             facebookOptions.Scope.Add("user_birthday");
             facebookOptions.Scope.Add("user_location");
             facebookOptions.Scope.Add("public_profile");
+            facebookOptions.Scope.Add("user_hometown");
             facebookOptions.Fields.Add("birthday");
             facebookOptions.Fields.Add("email");
             facebookOptions.Fields.Add("picture");

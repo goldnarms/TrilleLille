@@ -41,15 +41,16 @@
 @import "../wwwroot/lib/materialize/sass/components/date_picker/default.time";
 
 .icon-block {
-  padding: 0 15px;
-}
-.icon-block .material-icons {
-	font-size: inherit;
+    padding: 0 15px;
 }
 
-nav .brand-logo{
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+nav .brand-logo {
     display: normal;
-    position:relative;
+    position: relative;
     padding-right: 10px;
 }
 
@@ -57,12 +58,67 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+    font-family: 'Quicksand', sans-serif;
+}
 
-  main {
+main {
     flex: 1 0 auto;
-  }
+}
 
-  h6{
-      font-weight: 500;
-  }
+h6 {
+    font-weight: 500;
+}
+
+button{
+    border:0;
+}
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 100px;
+}
+
+.secondary-nav {
+    background-color: #7C7C7C;
+
+    ul {
+        padding: 15px;
+        margin-top: 0;
+
+        li {
+            display: inline;
+            font-family: 'Quicksand', sans-serif;
+            font-size: large;
+            font-weight: 600;
+            padding: 0 20px;
+
+            a {
+                color: white;
+                text-transform:uppercase;
+            }
+            a:hover {
+                color: #7BA1aa;
+            }
+        }
+    }
+}
+
+.facebook{
+    background-color: #3b5998;
+    color: white;
+    &:hover{
+        background-color:#8b9dc3;
+    }
+}
+
+
+fieldset.rss-feed{
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    display: block;
+    text-align: center;
+    padding-left: calc(50% - 120px);
+    >legend{
+        padding: 0 10px;
+    }
+}

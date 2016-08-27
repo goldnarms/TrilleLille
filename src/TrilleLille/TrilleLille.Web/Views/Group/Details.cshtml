@@ -4,12 +4,7 @@
     ViewData["Title"] = Model.Name;
 }
 @section stylesheets{
-<environment names="Development">
     <link rel="stylesheet" href="~/css/Pages/details.css" />
-    </environment>
-<environment names="Staging,Production">
-    <link rel="stylesheet" href="~/css/Pages/details.min.css" />
-</environment>    
 }
 <div class="intro teal lighten-4 z-depth-1">
     <h1 class="grey-text text-lighten-5">@Model.Name</h1>

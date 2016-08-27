@@ -1,0 +1,29 @@
+@using System.Text.Encodings.Web
+@using TrilleLille.Web.Services
+@model IEnumerable<RssFeed>
+
+@inject IRssReader RssReader
+
+<div class="row">
+    @foreach (var item in await RssReader.ReadFeed())
+    {
+        <div class="col s12 m4">
+            <div class="icon-block center">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="@item.ImageUrl" />
+                        <span class="card-title">@item.Title</span>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            @item.Description
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a href="@item.Link" target="_blank">Les mer ...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -48,6 +48,27 @@ namespace TrilleLille.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Signup(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Info(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(new InfoViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult Info(InfoViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return RedirectToLocal(returnUrl);
+        }
         //
         // POST: /Account/Login
         [HttpPost]
@@ -118,7 +139,8 @@ namespace TrilleLille.Web.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Info", returnUrl);
+//                    return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
             }
@@ -206,7 +228,7 @@ namespace TrilleLille.Web.Controllers
                 }
                 
 
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email, BirthDate = birthdate, Gender = gender, Name = name});
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email, BirthDate = birthdate, Parent = gender.ToLower() == "male" ? "Pappa" : "Mamma", Name = name});
             }
         }
 
@@ -225,7 +247,7 @@ namespace TrilleLille.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BirthDate = model.BirthDate, ParentType = model.Gender.ToLower() =="male" ? ParentType.Father : ParentType.Mother};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, BirthDate = model.BirthDate, ParentType = model.Parent.ToLower() =="pappa" ? ParentType.Father : ParentType.Mother};
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

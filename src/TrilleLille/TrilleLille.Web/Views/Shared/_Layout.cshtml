@@ -23,21 +23,23 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-        <link rel="stylesheet" href="~/css/style.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/style.min.css" asp-append-version="true"/>
+        
     </environment>
-
+    <link href="~/lib/fontawesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"> 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @RenderSection("stylesheets", required: false)
 </head>
 <body>
     <header>
         <nav class="" role="navigation">
-            <div class="nav-wrapper container">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="left brand-logo">
+            <div class="nav-wrapper valign-wrapper container">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="left brand-logo ">
 
-                    <img src="~/images/TrilleLille05.png" height="90" />
+                    <img src="~/images/TrilleLilleHorizontal.png" height="90" class="valign"/>
                 </a>
-                <ul class="hide-on-med-and-down right">
+                <ul class="hide-on-med-and-down valign right">
                     @Html.Partial("_NavBar")
                 </ul>
                 <ul id="nav-mobile" class="side-nav">
@@ -47,6 +49,17 @@
 
             </div>
         </nav>
+            <div class="secondary-nav">
+                <div class="col s12">
+                    <ul class="hide-on-med-and-down center">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Hjem</a></li>
+                        <li><a href="http://blogg.trillelille.no/">Blogg</a></li>
+                        <li><a href="http://blogg.trillelille.no/i-media/">I media</a></li>
+                        <li><a href="http://blogg.trillelille.no/om-oss/">Om oss</a></li>
+                        <li><a href="http://blogg.trillelille.no/kontakt-oss/">Kontakt oss</a></li>
+                    </ul>
+                </div>
+            </div>
     </header>
 <main class="body-content">
 

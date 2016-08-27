@@ -27,11 +27,20 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
+                    <input name="parentGroup" type="radio" id="mom" asp-for="Parent" value="@Model.Parent" />
+                    <label for="mom">Mamma</label>
+                    <input name="parentGroup" type="radio" id="dad" asp-for="Parent" value="@Model.Parent"  />
+                    <label for="dad">Pappa</label>
+                    <label class="active" for="gender" asp-for="Parent"></label>
+                </div>
+            </div>
+            @*<div class="row">
+                <div class="input-field col s12">
                     <input asp-for="Gender" type="text" class="validate" id="gender">
                     <span asp-validation-for="Gender" class="text-danger" />
                     <label class="active" for="gender" asp-for="Gender"></label>
                 </div>
-            </div>
+            </div>*@
             <div class="row">
                 <div class="input-field col s12">
                     <input asp-for="Name" type="text" class="validate" id="name">

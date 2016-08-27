@@ -3,7 +3,7 @@
     ViewData["Title"] = "TrilleLille";
 }
 
-<div class="section no-pad-bot" id="index-banner">
+@*<div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br>
         <h3 class="header center gray-text">Finn andre i foreldrepermisjon!</h3>
@@ -20,53 +20,31 @@
         </div>
         <br><br>
     </div>
-</div>
-
+</div>*@
 <div class="container">
     <div class="section">
-        <!--   Icon Section   -->
         <div class="row">
             <div class="col s12 m4">
-                <div class="icon-block center">
-                    @*<h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>*@
-                    <h5 class="center">Finn andre</h5>
-                    <p class="light center">Søk her for å finne andre i foreldrepermisjon.</p>
-                    <a asp-area="" asp-controller="Home" asp-action="Search" class="btn btn-large waves-effect waves-light cyan lighten-2 hide-on-med-and-up" style="margin-bottom: 30px">Søk</a>
-                </div>
+                <a asp-area="" asp-controller="Home" asp-action="Search">
+                    <img src="~/images/frontimage01_01.png" class="card" />
+                </a>
             </div>
             <div class="col s12 m4">
-                <div class="icon-block center">
-                    <h5 class="center">Lag din egen gruppe</h5>
-                    <p class="light center">Her kan du lage en egen gruppe for å søke etter andre i foreldrepermisjon.</p>
-                    <a asp-area="" asp-controller="Group" asp-action="Create" class="btn btn-large waves-effect waves-light cyan lighten-2 hide-on-med-and-up" style="margin-bottom: 30px">Opprett</a>
-                </div>
+                <a asp-area="" asp-controller="Group" asp-action="Create">
+                    <img src="~/images/frontimage02_1.png" class="card" />
+                </a>
             </div>
             <div class="col s12 m4">
-                <div class="icon-block center">
-                    <h5 class="center">Sånn fungerer det</h5>
-                    <p class="light center">
-                        Finn ut hvordan trillelille fungerer.
-                    </p>
-                    <a asp-area="" asp-controller="Group" asp-action="Index" class="btn btn-large waves-effect waves-light cyan lighten-2 hide-on-med-and-up" style="margin-bottom: 30px">Les her</a>
-                </div>
+                <a asp-area="" asp-controller="Group" asp-action="Index">
+                     <img src="~/images/frontimage03_1.png" class="card" />
+                </a>
             </div>
-        </div>
-        <div class="row hide-on-small-only">
-            <div class="col s12 m4 center">
-                @*<form asp-area="" asp-controller="Home" asp-action="Search" method="post" id="searchForm">
-                    <ul class="list-unstyled bottom"><li>Søk etter grupper </li><li><input asp-for="SearchTerm" class="form-control"/></li><li><button type="submit" class="btn btn-large waves-effect waves-light cyan lighten-2">Søk</button></li></ul>
-                </form>*@
-                <a asp-area="" asp-controller="Home" asp-action="Search" class="btn btn-large waves-effect waves-light cyan lighten-2">Søk</a>
-            </div>
-            <div class="col s12 m4 center">
-                    <a asp-area="" asp-controller="Group" asp-action="Create" class="btn btn-large waves-effect waves-light cyan lighten-2">Opprett</a>
-            </div>
-            <div class="col s12 m4 center">
-                    <a asp-area="" asp-controller="Group" asp-action="Index" class="btn btn-large waves-effect waves-light cyan lighten-2">Les her</a>
-            </div>            
         </div>
     </div>
-    <br><br>
+    <fieldset class="rss-feed">
+        <legend>SISTE INNLEGG FRA BLOGGEN</legend>
+    </fieldset>
+    @Html.Partial("_RssFeed")
     <div class="section">
     </div>
 </div>
