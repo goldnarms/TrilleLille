@@ -103,12 +103,12 @@ namespace TrilleLille.Web
             {
                 AppId =
                     env.IsDevelopment()
-                        ? Configuration["Authentication:Facebook:AppId_Dev"]
-                        : Configuration["Authentication:Facebook:AppId"],
+                        ? "564882930351052" //Configuration["Authentication:Facebook:AppId_Dev"]
+                        : "564819873690691", //Configuration["Authentication:Facebook:AppId"],
                 AppSecret =
                     env.IsDevelopment()
-                        ? Configuration["Authentication:Facebook:AppSecret_Dev"]
-                        : Configuration["Authentication:Facebook:AppSecret"]
+                        ? "0e7cbd47b6783a8edfcee4f598317903" //Configuration["Authentication:Facebook:AppSecret_Dev"]
+                        : "55b90ee638f7d0e021cab16243c1a099" //Configuration["Authentication:Facebook:AppSecret"]
             };
             facebookOptions.Scope.Add("user_birthday");
             facebookOptions.Scope.Add("user_location");

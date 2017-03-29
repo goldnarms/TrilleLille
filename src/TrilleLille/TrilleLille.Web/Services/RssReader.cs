@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Models;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
 using TrilleLille.Web.Models;
 
 namespace TrilleLille.Web.Services
@@ -22,10 +18,10 @@ namespace TrilleLille.Web.Services
             var feeds = from feed in feedXml.Descendants("item").Take(6)
                         select new RssFeed
                         {
-                            Title = feed.Element("title").Value,
-                            Link = feed.Element("link").Value,
-                            ImageUrl = feed.Element("image").Value,
-                            Description = Regex.Match(feed.Element("description").Value, @"^.{1,580}\b(?<!\s)").Value //feed.Element("description").
+                            Title = feed.Element("title")?.Value,
+                            Link = feed.Element("link")?.Value,
+                            ImageUrl = feed.Element("image")?.Value,
+                            Description = Regex.Match(feed.Element("description")?.Value, @"^.{1,580}\b(?<!\s)").Value //feed.Element("description").
                         };
             return feeds;
         }
